@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!--Created for Automatarium / JFLAP. Scanner DT del lenguaje BRA.
+Convención de símbolos en las transiciones:
+  l = cualquier letra [a-zA-Z]
+  d = cualquier dígito [0-9]
+  u = guion bajo _
+  o = "otro" (cualquier carácter no contemplado, dispara retroceso al cerrar el lexema)
+Estados de aceptación:
+  qIDFIN   -> emite token ID    (retroceso 1)
+  qNUMFIN  -> emite token NUM   (retroceso 1)
+  qASIG3   -> emite token ASIG
+  qPYC     -> emite token PYC
+  qMAS     -> emite token MAS
+  qMENOS   -> emite token MENOS
+Reglas para ID embebidas en el AFD:
+  - empieza con letra
+  - puede contener letra, dígito o _
+  - no termina en _ (qID_under no acepta cierre con o)
+  - no permite __ consecutivos (qID_under solo transita con letra o dígito)
+La longitud máxima 4 se valida por código de acción al cerrar el lexema.
+-->
+<structure>
+    <type>fa</type>
+    <automaton>
+        <state id="0" name="q0">
+            <x>80</x>
+            <y>240</y>
+            <initial/>
+        </state>
+        <state id="1" name="qID">
+            <x>240</x>
+            <y>80</y>
+        </state>
+        <state id="11" name="qID_under">
+            <x>240</x>
+            <y>0</y>
+        </state>
+        <state id="2" name="qIDFIN">
+            <x>420</x>
+            <y>80</y>
+            <final/>
+        </state>
+        <state id="3" name="qNUM">
+            <x>240</x>
+            <y>200</y>
+        </state>
+        <state id="4" name="qNUMFIN">
+            <x>420</x>
+            <y>200</y>
+            <final/>
+        </state>
+        <state id="5" name="qASIG1">
+            <x>240</x>
+            <y>320</y>
+        </state>
+        <state id="6" name="qASIG2">
+            <x>360</x>
+            <y>320</y>
+        </state>
+        <state id="7" name="qASIG3">
+            <x>480</x>
+            <y>320</y>
+            <final/>
+        </state>
+        <state id="8" name="qPYC">
+            <x>240</x>
+            <y>420</y>
+            <final/>
+        </state>
+        <state id="9" name="qMAS">
+            <x>240</x>
+            <y>500</y>
+            <final/>
+        </state>
+        <state id="10" name="qMENOS">
+            <x>240</x>
+            <y>580</y>
+            <final/>
+        </state>
+        <transition>
+            <from>0</from>
+            <to>1</to>
+            <read>l</read>
+        </transition>
+        <transition>
+            <from>0</from>
+            <to>3</to>
+            <read>d</read>
+        </transition>
+        <transition>
+            <from>0</from>
+            <to>5</to>
+            <read>:</read>
+        </transition>
+        <transition>
+            <from>0</from>
+            <to>8</to>
+            <read>;</read>
+        </transition>
+        <transition>
+            <from>0</from>
+            <to>9</to>
+            <read>+</read>
+        </transition>
+        <transition>
+            <from>0</from>
+            <to>10</to>
+            <read>-</read>
+        </transition>
+        <transition>
+            <from>1</from>
+            <to>1</to>
+            <read>l</read>
+        </transition>
+        <transition>
+            <from>1</from>
+            <to>1</to>
+            <read>d</read>
+        </transition>
+        <transition>
+            <from>1</from>
+            <to>11</to>
+            <read>u</read>
+        </transition>
+        <transition>
+            <from>1</from>
+            <to>2</to>
+            <read>o</read>
+        </transition>
+        <transition>
+            <from>11</from>
+            <to>1</to>
+            <read>l</read>
+        </transition>
+        <transition>
+            <from>11</from>
+            <to>1</to>
+            <read>d</read>
+        </transition>
+        <transition>
+            <from>3</from>
+            <to>3</to>
+            <read>d</read>
+        </transition>
+        <transition>
+            <from>3</from>
+            <to>4</to>
+            <read>o</read>
+        </transition>
+        <transition>
+            <from>5</from>
+            <to>6</to>
+            <read>:</read>
+        </transition>
+        <transition>
+            <from>6</from>
+            <to>7</to>
+            <read>=</read>
+        </transition>
+    </automaton>
+</structure>
